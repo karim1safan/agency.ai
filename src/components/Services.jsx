@@ -2,6 +2,7 @@ import React from "react";
 import assets from "../assets/assets";
 import Title from "./Title";
 import ServicesCard from "./ServicesCard";
+import { motion as Motion } from "motion/react";
 
 function Services() {
   const servicesData = [
@@ -40,7 +41,12 @@ function Services() {
       id="services"
       className="relative flex flex-col items-center gap-7 px-4 sm:px-12 lg:px-24 xl:px-40 pt-30 text-gray-700 dark:text-white"
     >
-      <img
+      <Motion.img
+      variants={{
+        hidden: {opacity: 1, y: 10},
+        visible: {opacity: 1, y: 0}
+      }}
+      transition={{duration: 0.2}}
         src={assets.bgImage2}
         alt="bg_image2"
         className="absolute -top-110 -left-70 -z-1 dark:hidden"
@@ -49,12 +55,16 @@ function Services() {
       <Title title="How can we help?" description="From strategy to execution, we craft digital solutions that move your
         business forward." />
 
-      <div className="flex flex-col md:grid grid-cols-2">
+      <Motion.div
+        className="flex flex-col md:grid grid-cols-2"
+      >
         {servicesData.map((service) => (
           // services card component 
-          <ServicesCard key={service.id} service={service} />
+          <Motion.div key={service.id}>
+            <ServicesCard service={service} />
+          </Motion.div>
         ))}
-      </div>
+      </Motion.div>
     </div>
   );
 }

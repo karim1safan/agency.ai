@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 import assets from "../../src/assets/assets";
-import ThemeToggleButton from './ThemeToggleButton';
+import ThemeToggleButton from "./ThemeToggleButton";
 
-function Navbar({theme, setTheme}) {
+import { motion } from "motion/react"; // eslint-disable-line
 
-
+function Navbar({ theme, setTheme }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-
   return (
-    // Navbar Component 
-    <div className="flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 sticky top-0 z-20 backdrop-blur-xl font-medium bg-white/50 dark:bg-gray-900/70">
+    // Navbar Component
+    <motion.div 
+    initial={{opacity: 0, y: -50}}
+    animate={{opacity: 1, y: 0}}
+    transition={{duration: 0.6, ease: "easeOut"}}
+    className="flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 sticky top-0 z-20 backdrop-blur-xl font-medium bg-white/50 dark:bg-gray-900/70">
       <img
         src={theme === "dark" ? assets.logo_dark : assets.logo}
         alt="logo"
@@ -28,24 +31,39 @@ function Navbar({theme, setTheme}) {
           onClick={() => setSidebarOpen(false)}
         />
 
-        <a onClick={() => setSidebarOpen(false)} href="#home" className="sm:hover:border-b">
+        <a
+          onClick={() => setSidebarOpen(false)}
+          href="#home"
+          className="sm:hover:border-b"
+        >
           Home
         </a>
-        <a onClick={() => setSidebarOpen(false)} href="#services" className="sm:hover:border-b">
+        <a
+          onClick={() => setSidebarOpen(false)}
+          href="#services"
+          className="sm:hover:border-b"
+        >
           Services
         </a>
-        <a onClick={() => setSidebarOpen(false)} href="#our-work" className="sm:hover:border-b">
+        <a
+          onClick={() => setSidebarOpen(false)}
+          href="#our-work"
+          className="sm:hover:border-b"
+        >
           Our Work
         </a>
-        <a onClick={() => setSidebarOpen(false)} href="#contact-us" className="sm:hover:border-b">
+        <a
+          onClick={() => setSidebarOpen(false)}
+          href="#contact-us"
+          className="sm:hover:border-b"
+        >
           Contact Us
         </a>
       </nav>
 
       <div className="flex items-center gap-2 sm:gap-4">
-
         <ThemeToggleButton theme={theme} setTheme={setTheme} />
-      
+
         <button className="cursor-pointer">
           <img
             src={theme === "dark" ? assets.menu_icon_dark : assets.menu_icon}
@@ -54,7 +72,7 @@ function Navbar({theme, setTheme}) {
             onClick={() => setSidebarOpen(true)}
           />
         </button>
-        
+
         <button>
           <a
             href="#contact-us"
@@ -64,8 +82,8 @@ function Navbar({theme, setTheme}) {
           </a>
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-export default Navbar
+export default Navbar;
